@@ -2,8 +2,8 @@
 import random
 number = random.randint(-10, 10)
 if number > 0:
-print(f"{number:d} is postive")
-elif x == 0:
-print(f"{number:d} is zero")
+    print("{} is postive".format(number))
+elif number == 0:
+    print("{} is zero".format(number))
 else:
-print(f"{number:d} is negative")
+    print(f"{} is negative".format(number))
