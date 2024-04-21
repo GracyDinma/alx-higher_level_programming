@@ -105,3 +105,22 @@ class Rectangle(Base):
         """
 
         return self.__width * self.__height
+
+    def display(self):
+        """Prints #."""
+
+        for y in range(0, self.__y):
+            print()
+        for i in range(0, self.__height):
+            for x in range(0, self.__x):
+                print(" ", end="")
+            for j in range(0, self.__width):
+                print("#", end="")
+            print()
+
+    def __str__(self):
+        """Returns a string representation of an instance"""
+
+        s = "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.__x, self.__y, self.__width, self.__height)
+        return s
