@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-"""Module base.
+"""Module for Base class.
 Defines a Base class for other classes in the project.
 """
-
-import json
-import os
+from json import dumps, loads
 import csv
 
 
@@ -38,12 +36,10 @@ class Base:
         Returns: JSON string representations of the list
         """
 
-        if list_dictionaries is None or list_dictionaries == []:
+        if list_dictionaries is None or not list_dictionaries:
             return "[]"
-        if (type(list_dictionaries) != list or
-           not all(type(x) == dict for x in list_dictionaries)):
-            raise TypeError("list_dictionaries must be a list of dictionaries")
-        return json.dumps(list_dictionaries)
+        else:
+            return dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -51,21 +47,12 @@ class Base:
         list_objs to a file.
 
         Args:
-            - list_objs: list of instances who inherits of Base
+            - list_objs: list of instances who inherits of Base.
         """
-        """
-        if type(list_objs) != list and list_objs is not None:
-            raise TypeError("list_objs must be a list of instances")
-        if any(issubclass(type(x), Base) is False for x in list_objs):
-            raise TypeError("list_objs must be a list of instances")
-        """
-        if list_objs is None or list_objs == []:
-            jstr = "[]"
-        else:
-            jstr = cls.to_json_string([o.to_dictionary() for o in list_objs])
-        filename = cls.__name__ + ".json"
-        with open(filename, 'w') as f:
-            f.write(jstr)
+        if list_objs is not None:
+            list_objs = [o.to_dictionary() for o in list_objs]
+        with open("{}.json".format(cls.__name__), "w", encoding="utf-8") as f:
+            f.write(cls.to_json_string(list_objs))
 
     @staticmethod
     def from_json_string(json_string):
@@ -75,12 +62,9 @@ class Base:
             - json_string: string to convert to list
         """
 
-        s = []
-        if json_string is not None and json_string != '':
-            if type(json_string) != str:
-                raise TypeError("json_string must be a string")
-            s = json.loads(json_string)
-        return l
+        if json_string is None or not json_string:
+            return []
+        return loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
@@ -91,9 +75,11 @@ class Base:
 
         Returns: instance created
         """
-        if cls.__name__ == 'Rectangle':
-            dummy = cls(1, 1)
-        elif cls.__name__ == 'Square':
-            dummy = cls(1)
+        if cls is Rectangle:
+            dummy = Rectangle(1, 1)
+        elif cls is Square:
+            dummy = Square(1)
+        else:
+            new = None
         dummy.update(**dictionary)
         return dummy
