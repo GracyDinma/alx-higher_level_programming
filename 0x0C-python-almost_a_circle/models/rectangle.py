@@ -2,8 +2,7 @@
 """Module 2
 Defines a class Rectangle that inherits from Base.
 """
-import json
-from base import Base
+from models.base import Base
 
 
 class Rectangle(Base):
@@ -26,12 +25,12 @@ class Rectangle(Base):
             y: y of the instance
             id: id of the instance
         """
-
+        
+        super().__init_(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
-        super().__init_(id)
 
         """private instance attributes."""
     @property
@@ -40,43 +39,37 @@ class Rectangle(Base):
 
         return self.__width
 
+    @width.setter
+    def width(self, value):
+        """Sets the width attribute."""
+
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+        self.__width = value
+
     @property
     def height(self):
         """Retrieves the height attribute."""
 
         return self.__height
 
+    @height.setter
+    def height(self, value):
+        """Sets the height attribute."""
+
+        if not isinstance(value, int):
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
+        self.__height = value
+
     @property
     def x(self):
         """Retrieves the x attribute."""
 
         return self.__x
-
-    @property
-    def y(self):
-        """Retrieves the y attribute."""
-
-        return self.__y
-
-    @width.setter
-    def width(self, value):
-        """Sets the width attribute."""
-
-        if type(value) is not int:
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = value
-
-    @height.setter
-    def height(self, value):
-        """Sets the height attribute."""
-
-        if type(value) is not int:
-            raise TypeError("height must be an integer")
-        if value <= 0:
-            raise ValueError("height must be > 0")
-        self.__height = value
 
     @x.setter
     def x(self, value):
@@ -87,6 +80,12 @@ class Rectangle(Base):
         if value <= 0:
             raise ValueError("x must be >= 0")
         self.__x = value
+
+    @property
+    def y(self):
+        """Retrieves the y attribute."""
+
+        return self.__y
 
     @y.setter
     def y(self, value):
