@@ -2,4 +2,4 @@
 -- The database name will be passed as argument of myaql command
 -- in the following example: mysql is the name of the database.
 
-SHOW TABLE:S; 
+SHOW TABLES; 
