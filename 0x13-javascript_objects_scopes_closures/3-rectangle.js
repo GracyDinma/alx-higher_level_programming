@@ -12,15 +12,13 @@ class Rectangle {
 
   print () {
     for (let i = 0; i < this.height; i++) {
-      let myVar = '';
-      let y = 0;
-      while (y < this.width) {
-        myVar += 'X';
-        y++;
+      let row = '';
+      for (let j = 0; j < this.width; j++) {
+        row += 'X';
       }
 
-      console.log(myVar);
+      console.log(row);
     }
   }
 }
-module.exports = Rectange;
+module.exports = Rectangle;
