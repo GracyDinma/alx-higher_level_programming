@@ -9,4 +9,5 @@ if __name__ == "__main__":
 
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as response:
-        print(dict(response.headers).get("X-Request-id"))
+        x_request_id = response.headers.get('X-Request-id')
+        print(x_request_id)
