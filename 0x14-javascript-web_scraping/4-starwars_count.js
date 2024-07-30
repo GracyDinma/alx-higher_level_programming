@@ -1,10 +1,10 @@
 #!/usr/bin/node
 
 const request = require('request');
-const starWarsUri = process.argv[2];
+const starWarsUrl = process.argv[2];
 let times = 0;
 
-request(starWarsUri, function (_err, _res, body) {
+request(starWarsUrl, function (_err, _res, body) {
   body = JSON.parse(body).results;
 
   for (let i = 0; i < body.length; ++i) {
